@@ -1,0 +1,10 @@
+<h1>Recipes</h1>
+<div id="recipes">
+    <div *ngFor="let recipe of recipes" class="recipe-card">
+      <img [src]="recipe.image" alt="Recipe Image">
+      <h2>{{ recipe.name }}</h2>
+      <p>Difficulty: {{ recipe.difficulty }}</p>
+      <a (click)="showMoreDetails(recipe)"><i class="fas fa-arrow-right-to-bracket fa-1xl" id="modal-icon"></i></a>
+     
+  </div>
+  

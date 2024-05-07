@@ -14,7 +14,10 @@ import { HomeComponent } from './home/home.component';
   declarations: [
     AppComponent,
     RecipeDetailsComponent,
+<<<<<<< HEAD
     HomeComponent
+=======
+>>>>>>> d3d3aa09b74e480063619033d4818285c9201606
   ],
   imports: [
     BrowserModule,
@@ -25,4 +28,5 @@ import { HomeComponent } from './home/home.component';
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
