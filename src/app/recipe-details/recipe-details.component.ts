@@ -9,12 +9,14 @@ import { Recipe } from '../recipe.model';
   styleUrls: ['./recipe-details.component.css']
 })
 export class RecipeDetailsComponent implements OnInit {
-  recipe: Recipe;
+  // recipe!: Recipe;
 
-  constructor(private route: ActivatedRoute, private recipeService: RecipeService) { }
-
-  ngOnInit(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.recipeService.getRecipe(id).subscribe(recipe => this.recipe = recipe);
-  }
+  // constructor(private route: ActivatedRoute, private recipeService: RecipeService) { }
+ngOnInit(): void {
+  
+}
+  // ngOnInit(): void {
+  //   const id = this.route.snapshot.paramMap.get('id');
+  //   this.recipeService.getRecipe(id).subscribe(recipe => this.recipe = recipe);
+  // }
 }
