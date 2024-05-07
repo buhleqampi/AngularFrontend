@@ -8,7 +8,7 @@ import { RecipeCardsComponent } from './recipe-cards/recipe-cards.component';
 @NgModule({
   declarations: [
     AppComponent,
-    RecipeCardsComponent
+    RecipeCardsComponent,
   ],
   imports: [
     BrowserModule,
