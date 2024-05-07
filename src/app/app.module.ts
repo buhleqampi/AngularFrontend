@@ -9,7 +9,7 @@ import { RecipeDetailsComponent } from './recipe-details/recipe-details.componen
 @NgModule({
   declarations: [
     AppComponent,
-    RecipeDetailsComponent
+    RecipeDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -19,4 +19,5 @@ import { RecipeDetailsComponent } from './recipe-details/recipe-details.componen
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
