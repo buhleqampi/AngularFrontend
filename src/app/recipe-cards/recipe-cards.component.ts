@@ -5,6 +5,7 @@ import { Component, Input } from '@angular/core';
   templateUrl: './recipe-cards.component.html',
   styleUrls: ['./recipe-cards.component.css']
 })
+
 export class RecipeCardsComponent {
   @Input() recipes: any[] | undefined;
 
@@ -17,3 +18,4 @@ export class RecipeCardsComponent {
   }
 }
 
+   
