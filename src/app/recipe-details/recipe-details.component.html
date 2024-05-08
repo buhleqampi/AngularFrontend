@@ -1,18 +1,18 @@
 
-<div >
+<div *ngif="selectedRecipe">
 <div class="modal-header">
   <img src="https://cdn.dummyjson.com/recipe-images/1.webp"  class="modal-image" />
   <div>
-<a type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-circle-xmark"></i></a>
-    <h1><strong> Classic Margherita Pizza</strong> (Dinner)</h1>
-    <p><strong><i class="fa-regular fa-clock"></i> Prep Time:</strong> 20 min</p>
-    <p><strong><i class="fa-solid fa-clock"></i> Cook Time:</strong> 15 min</p>
-    <p><strong><i class="fa-solid fa-people-group"></i> Servings</strong> 4 people/person</p>
+<a type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="goBack()"><i class="fa-solid fa-circle-xmark"></i></a>
+    <h1><strong> {{selectedRecipe.name}}</strong> {{selectedRecipe.mealType}}</h1>
+    <p><strong><i class="fa-regular fa-clock"></i> Prep Time:</strong> {{selectedRecipe.prepTimeMinutes}}</p>
+    <p><strong><i class="fa-solid fa-clock"></i> Cook Time:</strong> {{selectedRecipe.cookTimeMinutes}}</p>
+    <p><strong><i class="fa-solid fa-people-group"></i> Servings</strong>{{selectedRecipe.servings}}</p>
   <div class="modal-btns">
     
-    <a (click)="playVideo()"><i class="far fa-circle-play fa-2x"></i></a>
+    <a (click)="playVideo({{youtubeLink}})"><i class="far fa-circle-play fa-2x"></i></a>
     <a class="favoriteBtn"><i class="fas fa-heart fa-2x"></i></a>
-    <a (click)="startTextToSpeech()"><i class="fas fa-volume-up fa-2x"></i></a>
+    <a (click)="startTextToSpeech({{recipe.voice}})"><i class="fas fa-volume-up fa-2x"></i></a>
   </div>
   
 </div>
@@ -20,12 +20,11 @@
   <div class="modal-body" >
   
   <div>
-    <p><strong>Tags:</strong>  Pizza,Italian</p>
-    <p><strong>Ingredients:</strong>  Pizza dough,Tomato sauce,Fresh mozzarella cheese,Fresh basil leaves,Olive oil,Salt and pepper to taste
-
+    <p><strong>Tags:</strong> {{selectedRecipe.tags}}</p>
+    <p><strong>Ingredients:</strong>  {{ selectedRecipe.ingredients }}
     </p>
-    <p><strong>Instructions:</strong>  Preheat the oven to 475°F (245°C).,Roll out the pizza dough and spread tomato sauce evenly.,Top with slices of fresh mozzarella and fresh basil leaves.,Drizzle with olive oil and season with salt and pepper.,Bake in the preheated oven for 12-15 minutes or until the crust is golden brown.,Slice and serve hot.</p>
-    <p><strong>Calories per Serving:</strong> 300</p>
+    <p><strong>Instructions:</strong>{{selectedRecipe.instructions}}</p>
+    <p><strong>Calories per Serving:</strong> {{selectedRecipe.caloriesPerServing}}</p>
 
   </div>
   </div>

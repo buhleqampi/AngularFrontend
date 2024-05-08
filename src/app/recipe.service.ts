@@ -8,6 +8,7 @@ import { Recipe } from './recipe.model';
 })
 export class RecipeService {
   private apiUrl = '/api/recipes'; 
+  getAllRecipes: any;
 
   constructor(private http: HttpClient) { }
 
