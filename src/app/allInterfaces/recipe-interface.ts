@@ -3,6 +3,7 @@ export interface Recipe {
     image: string;
     difficulty: string;
     rating: number;
+    voice: SpeechSynthesisVoice
     youtubeLink: string;
     mealType: string;
     prepTimeMinutes: number;
