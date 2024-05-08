@@ -1,0 +1,35 @@
+.second {
+    background-color: brown; 
+    padding: 30px 60px;
+    border-bottom-right-radius: 100px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-group label {
+    color: white;
+    font-weight: 600;
+  }
+
+  .btn-group label:active {
+    background-color: black;
+    color: white;
+
+  }
+   
+  input[type='radio'] {
+    /* -webkit-appearance:none; */
+    border: white;
+    accent-color: #ffc107;
+  }
+
+  .container { 
+    display: flex;
+   }
+
+   #difficulty {
+    border-radius: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+   }
+   

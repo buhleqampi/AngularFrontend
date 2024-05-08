@@ -1,0 +1,35 @@
+<div class="second">
+    <hr>
+    <form class="d-flex" role="search">
+      <input id="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    </form>
+    <div class="row">
+      <div class="col-4">
+        <div class="banner">
+          <div class="container">
+            <label for="difficulty"><h4 style="color: white; font-weight: 600;padding: 10px;" >Difficulty:</h4></label>
+            <select id="difficulty" [(ngModel)]="selectedDifficulty" (change)="filterByDifficulty()">
+              <option value="None">None</option>
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="filter-box">
+          <div class="btn-group">
+            <label *ngFor="let meal of mealTypes">
+              <input class="radio" type="radio" name="mealType" [value]="meal" [(ngModel)]="selectedMealType" (change)="filterByMealType()">
+              {{ meal }}
+            </label>
+            <!-- <a href="">Breakfast</a>
+            <a href="">Lunch</a>
+            <a href="">Dinner</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
