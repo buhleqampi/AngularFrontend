@@ -1,7 +1,7 @@
 import { Component, OnInit ,input} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RecipeService } from '../recipe.service';
-import { Recipe } from '../recipe.model';
+import { RecipeService } from '../allServices/recipe.service';
+import { Recipe } from '../allInterfaces/recipe-interface';
 import { Location } from '@angular/common';
 
 
@@ -19,7 +19,7 @@ export class RecipeDetailsComponent implements OnInit {
 
   
   ngOnInit(): void {
-
+this.getRecipe()
   }
 
   selectedRecipe?: Recipe
@@ -33,15 +33,15 @@ export class RecipeDetailsComponent implements OnInit {
           el._id.includes(recipeId)
         );
 
-        this.selectedRecipe = this.recipe;
-        console.log(this.recipe)
+        this.selectedRecipe = recipe;
+        console.log(this.selectedRecipe);
       },
       error: console.log,
     });
   }
 
 playVideo(): void {
-  window.open("{{youtubeLink}}", "_blank");
+  window.open("{{videoLink}}", "_blank");
   
 }
 

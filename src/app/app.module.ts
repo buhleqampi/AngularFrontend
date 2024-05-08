@@ -6,11 +6,16 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
+import { HomeComponent } from './home/home.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    RecipeDetailsComponent
+    RecipeDetailsComponent,
+    HomeComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
@@ -21,4 +26,5 @@ import { RecipeDetailsComponent } from './recipe-details/recipe-details.componen
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
