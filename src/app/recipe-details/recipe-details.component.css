@@ -1,6 +1,7 @@
 .modal-image {
     height: 300px;
     width: 300px;
+    border-radius: 20px;
   }
 
   
@@ -22,4 +23,39 @@
   
   .modal-btns {
    margin-top: 30px;
+  }
+
+  a{
+    color: black;
+    text-decoration: none;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    a:hover{
+      box-shadow: -6px -6px 10px #f9f9f9,
+      6px 6px 10px #00000026
+    }
+
+    
+
+    .time-info {
+      margin: 10px;
+      display: flex-start;
+      gap: 20px;
+    }
+
+    form button .fas{
+      font-size: 16px;
+      color:#ccc ;
+      line-height: 30px;
+   }
+
+   .btn-close {
+    /* color: black; */
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 900px;
   }
