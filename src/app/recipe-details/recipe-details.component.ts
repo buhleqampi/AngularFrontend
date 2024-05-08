@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe.model';
-declare var SpeechSynthesisUtterance: any;
 
 
 @Component({
@@ -35,7 +34,58 @@ startTextToSpeech(): void {
   //   this.recipeService.getRecipe(id).subscribe(recipe => this.recipe = recipe);
   // }
 }
-function mRead(ingredients: string, instructions: string) {
-  throw new Error('Function not implemented.');
+
+function mRead(ingredients: string, instructions: string): void {
+  let utterance = new SpeechSynthesisUtterance(`Before we get you started, let's make sure you have the following ingredients: ${ingredients}`);
+  utterance.rate = 0.9;
+
+  const synth = window.speechSynthesis;
+  synth.cancel();  
+  synth.onvoiceschanged = function() {
+    let voices = synth.getVoices();
+    utterance.voice = voices[2];
+
+    utterance.addEventListener("end", function() {
+      let utterance2 = new SpeechSynthesisUtterance(`Shall we begin?`);
+      utterance2.voice = voices[2];
+      utterance2.rate = 0.8;
+      synth.speak(utterance2);
+
+      const user = confirm("Shall we begin?");
+      if (user) {
+        let utterance3 = new SpeechSynthesisUtterance(`Great! Let's begin. ${instructions}`);
+        utterance3.voice = voices[2];
+        utterance3.rate = 0.8;
+        synth.speak(utterance3);
+
+        const ins = instructions.split(".,");
+        let nextStep = true;
+        let counter = 0;
+
+        let inter = setInterval(() => {
+          if (nextStep) {
+            utterance3.text = `Step ${counter + 1}, ${ins[counter]}`;
+            synth.speak(utterance3);
+            nextStep = false;
+            counter++;
+            utterance3.addEventListener("end", function() {
+              nextStep = true;
+            });
+          }
+          if (counter == ins.length) {
+            setTimeout(() => {
+              utterance3.text = `Cooking complete. Well done!`;
+              synth.speak(utterance3);
+            }, 3000);
+            clearInterval(inter);
+          }
+        }, 1500);
+      }
+    });
+
+    synth.speak(utterance);
+  };
 }
+
+
 
