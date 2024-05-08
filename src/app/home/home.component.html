@@ -24,9 +24,7 @@
               <input class="radio" type="radio" name="mealType" [value]="meal" [(ngModel)]="selectedMealType" (change)="filterByMealType()">
               {{ meal }}
             </label>
-            <!-- <a href="">Breakfast</a>
-            <a href="">Lunch</a>
-            <a href="">Dinner</a> -->
+          
           </div>
         </div>
       </div>
@@ -43,7 +41,7 @@
       </div>
     </div>
     <div class="text">
-      <h3 class="food">{{ recipe.name }}</h3>
+      <h2 class="food">{{ recipe.name | uppercase }}</h2>
 
       <div class="highlights">
         <i class="fa fa-clock-o">{{ recipe.prepTime }}</i>
