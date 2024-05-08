@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
+import { RecipeService } from '../allServices/recipe.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -7,6 +9,30 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  constructor(
+    private _recipeService : RecipeService,
+    private router: Router
+  ) {}
+
+  recipes?:any;
+
+  ngOnInit(): void {
+    this.getAllRecipes();
+  }
+
+  getAllRecipes(): void {
+    this._recipeService.getAllRecipes().subscribe({
+      next: (res) => {
+        this.recipes = res;
+      },
+    });
+  }
+
+  onSelect(_id: number): void {
+    this.router.navigate(["/recipe", _id])
+  }
+
+
   selectedDifficulty: string = 'None';
   selectedMealType: string = 'Breakfast';
 
