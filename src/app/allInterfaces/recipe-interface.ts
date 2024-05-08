@@ -1,14 +1,16 @@
 export interface Recipe {
-  title: String;
-  ingredients: [String];
-  instructions: String;
-  cuisine: String;
-  mealType: String;
-  calories: Number;
-  cookTime: String;
-  prepTime: String;
-  servings: String;
-  image: String;
-  videoLink: String
+  _id: string;
+  name: string;
+  ingredients: [string];
+  instructions: string;
+  cuisine: string;
+  difficulty: string;
+  mealType: string;
+  calories: number;
+  cookTime: string;
+  prepTime: string;
+  servings: string;
+  image: string;
+  videoLink: string
   }
   

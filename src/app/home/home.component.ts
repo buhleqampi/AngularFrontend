@@ -1,20 +1,26 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../allServices/recipe.service';
 import { Router } from '@angular/router';
-
+import { Recipe } from '../allInterfaces/recipe-interface';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   constructor(
-    private _recipeService : RecipeService,
+    private _recipeService: RecipeService,
     private router: Router
   ) {}
 
-  recipes?:any;
+  recipes: Recipe[] = [];
+  filteredRecipes: Recipe[] = [];
+
+  selectedDifficulty: string = 'None';
+  selectedMealType: string = '';
+
+  mealTypes: string[] = ['Breakfast', 'Lunch', 'Dinner']; 
 
   ngOnInit(): void {
     this.getAllRecipes();
@@ -28,48 +34,25 @@ export class HomeComponent {
     });
   }
 
-  onSelect(_id: number): void {
-    this.router.navigate(["/recipe", _id])
+  onSelect(id: string): void {
+    // Navigate to recipe details page
+    this.router.navigate(['/recipe', id]);
   }
 
-  mealTypes: string[] = ['Breakfast', 'Lunch', 'Dinner', 'Snack']; 
 
-  selectedDifficulty: string = 'None';
-  selectedMealType: string = '';
-
-  // Assuming you have an array of recipes
-  // recipes: any[] = [
-  //   // Your array of recipes
-  // ];
-
-  // Function to filter recipes by difficulty
-  filterByDifficulty() {
-    // Implement your filtering logic here
-    console.log("Filtering by difficulty:", this.selectedDifficulty);
-    // this.filteredRecipes = this.recipes.filter(recipe => recipe.difficulty === this.selectedDifficulty);
-  }
-
-  // Function to filter recipes by meal type
-  filterByMealType() {
-    // Implement your filtering logic here
-    console.log("Filtering by meal type:", this.selectedMealType);
+filterByMealType(mealType: string): Recipe[] {
+  const validMealTypes = ["Breakfast","Lunch","Dinner"];
     
-    // this.filteredRecipes = this.allRecipes.filter(recipe => recipe.mealType === this.selectedMealType);
+  if (!validMealTypes.includes(mealType)){
+      console.error("Invalid meal type. Please provide 'Breakfast','Lunch' or 'Dinner'.");
+      return [];
   }
+  const filtered =  this.recipes.filter(recipe => recipe.mealType.includes(mealType));
+
+  console.log(filtered) 
+  this.recipes = filtered
+  return filtered
+ 
 }
 
-//   selectedDifficulty: string = 'None';
-//   selectedMealType: string = 'Breakfast';
-
-//   mealTypes: string[] = ['Breakfast', 'Lunch', 'Dinner'];
-
-//   filterByDifficulty() {
-//     // Implement filter logic by difficulty
-//     console.log('Filtered by difficulty:', this.selectedDifficulty);
-//   }
-
-//   filterByMealType() {
-//     // Implement filter logic by meal type
-//     console.log('Filtered by meal type:', this.selectedMealType);
-//   }
-// }
+}
