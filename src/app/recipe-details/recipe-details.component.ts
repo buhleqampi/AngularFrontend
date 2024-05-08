@@ -70,6 +70,7 @@ function mRead(ingredients: string, instructions: string): void {
             counter++;
             utterance3.addEventListener("end", function() {
               nextStep = true;
+              confirm("Continue?")
             });
           }
           if (counter == ins.length) {
