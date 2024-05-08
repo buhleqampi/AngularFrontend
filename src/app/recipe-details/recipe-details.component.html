@@ -11,9 +11,10 @@
 </div>
   <div class="modal-body" >
   <div class="modal-btns">
-    <a src="https://www.youtube.com/watch?v=joGKYTGbVw8" target="_blank"><i class="far fa-circle-play fa-2x"></i></a>
+    <a (click)="playVideo()"><i class="far fa-circle-play fa-2x"></i></a>
     <a class="favoriteBtn"><i class="fas fa-heart fa-2x"></i></a>
-    <a id="textToSpeechBtn"><i class="fas fa-volume-up fa-2x"></i></a>
+    <a (click)="startTextToSpeech()"><i class="fas fa-volume-up fa-2x"></i></a>
+    
   </div>
   <div><hr>
     <p>Tags:  Pizza,Italian</p>
