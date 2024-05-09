@@ -18,18 +18,21 @@ export class HomeComponent implements OnInit {
   filteredRecipes: Recipe[] = [];
 
   selectedDifficulty: string = 'None';
-  selectedMealType: string = '';
+  selectedMealType: string = 'All';
 
-  mealTypes: string[] = ['Breakfast', 'Lunch', 'Dinner']; 
+  mealTypes: string[] = ['All','Breakfast', 'Lunch', 'Dinner']; 
 
   ngOnInit(): void {
     this.getAllRecipes();
+    this.filteredRecipes
+    console.log(this.recipes)
   }
 
   getAllRecipes(): void {
     this._recipeService.getAllRecipes().subscribe({
       next: (res) => {
         this.recipes = res;
+        this.filteredRecipes = res
       },
     });
   }
@@ -47,11 +50,10 @@ filterByMealType(mealType: string): Recipe[] {
       console.error("Invalid meal type. Please provide 'Breakfast','Lunch' or 'Dinner'.");
       return [];
   }
-  const filtered =  this.recipes.filter(recipe => recipe.mealType.includes(mealType));
+  this.filteredRecipes =  this.recipes.filter(recipe => recipe.mealType.includes(mealType));
 
-  console.log(filtered) 
-  this.recipes = filtered
-  return filtered
+  console.log(this.filteredRecipes) 
+  return this.filteredRecipes
  
 }
 
