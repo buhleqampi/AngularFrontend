@@ -48,59 +48,37 @@ export class RecipeDetailsComponent implements OnInit {
 let confirmationShown: boolean[] = [];
 
 function mRead(ingredients: string, instructions: string): void {
-
+  let synth = window.speechSynthesis;
+  synth.cancel();
 
   let utterance = new SpeechSynthesisUtterance(`Before we get you started, let's make sure you have the following ingredients: ${ingredients}`);
   utterance.rate = 0.9;
+  synth.speak(utterance);
 
-  const synth = window.speechSynthesis;
-  synth.cancel();
-  synth.onvoiceschanged = function () {
-    let voices = synth.getVoices();
-    utterance.voice = voices[2];
+  utterance.onend = () => {
+    let steps = instructions.split('.'); // Split instructions into steps
+    let currentStepIndex = 0;
 
-    utterance.addEventListener("end", function () {
-      let utterance2 = new SpeechSynthesisUtterance(`Shall we begin?`);
-      utterance2.voice = voices[2];
-      utterance2.rate = 0.8;
-      synth.speak(utterance2);
-
-      if (!confirmationShown.includes(false)) {
-        const user = confirm("Shall we begin?");
-        if (user) {
-          confirmationShown = Array(instructions.split(".,").length).fill(false);
-          const utterance3 = new SpeechSynthesisUtterance(`Great! Let's begin. ${instructions}`);
-          utterance3.voice = voices[2];
-          utterance3.rate = 0.8;
-          synth.speak(utterance3);
-
-          const ins = instructions.split(".,");
-          let counter = 0;
-
-          const inter = setInterval(() => {
-            if (!confirmationShown[counter]) {
-              const utterance4 = new SpeechSynthesisUtterance(`Step ${counter + 1}, ${ins[counter]}`);
-              utterance4.voice = voices[2];
-              utterance4.rate = 0.8;
-              synth.speak(utterance4);
-              confirmationShown[counter] = true;
-              utterance4.addEventListener("end", function () {
-                confirm("Continue?");
-              });
-            }
-            counter++;
-            if (counter === ins.length) {
-              clearInterval(inter);
-              const utterance5 = new SpeechSynthesisUtterance(`Cooking complete. Well done!`);
-              utterance5.voice = voices[2];
-              utterance5.rate = 0.8;
-              synth.speak(utterance5);
-            }
-          }, 1500);
-        }
+    // Function to speak the current step and ask for confirmation
+    function speakStep() {
+      let currentStep = steps[currentStepIndex].trim();
+      if (currentStep) {
+        let utterance = new SpeechSynthesisUtterance(`Step ${currentStepIndex + 1}: ${currentStep}. Continue?`);
+        synth.speak(utterance);
+        utterance.onend = () => {
+          // Ask for confirmation after each step
+          if (confirm('Continue?')) {
+            currentStepIndex++;
+            speakStep(); // Continue to the next step
+          }
+        };
+      } else {
+        // If no more steps, inform cooking is complete
+        let utterance = new SpeechSynthesisUtterance('Cooking complete. Well done!');
+        synth.speak(utterance);
       }
-    });
+    }
 
-    synth.speak(utterance);
+    speakStep(); // Start speaking the steps
   };
 }
