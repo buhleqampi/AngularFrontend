@@ -44,7 +44,7 @@ filterByMealType(mealType: string): Recipe[] {
   const validMealTypes = ["Breakfast","Lunch","Dinner"];
     
   if (!validMealTypes.includes(mealType)){
-      console.error("Invalid meal type. Please provide 'Breakfast','Lunch' or 'Dinner'.");
+      console.error("Invalid meall type. Please provide 'Breakfast','Lunch' or 'Dinner'.");
       return [];
   }
   const filtered =  this.recipes.filter(recipe => recipe.mealType.includes(mealType));
