@@ -56,29 +56,26 @@ function mRead(ingredients: string, instructions: string): void {
   synth.speak(utterance);
 
   utterance.onend = () => {
-    let steps = instructions.split('.'); // Split instructions into steps
+    let steps = instructions.split('.');
     let currentStepIndex = 0;
 
-    // Function to speak the current step and ask for confirmation
     function speakStep() {
       let currentStep = steps[currentStepIndex].trim();
       if (currentStep) {
-        let utterance = new SpeechSynthesisUtterance(`Step ${currentStepIndex + 1}: ${currentStep}. Continue?`);
+        let utterance = new SpeechSynthesisUtterance(`Step ${currentStepIndex + 1}: ${currentStep}. `);
         synth.speak(utterance);
         utterance.onend = () => {
-          // Ask for confirmation after each step
           if (confirm('Continue?')) {
             currentStepIndex++;
-            speakStep(); // Continue to the next step
+            speakStep(); 
           }
         };
       } else {
-        // If no more steps, inform cooking is complete
         let utterance = new SpeechSynthesisUtterance('Cooking complete. Well done!');
         synth.speak(utterance);
       }
     }
 
-    speakStep(); // Start speaking the steps
+    speakStep(); 
   };
 }
