@@ -7,11 +7,15 @@ import { Recipe } from '../allInterfaces/recipe-interface';
   providedIn: 'root'
 })
 export class RecipeService {
-  private apiUrl = '/api/recipes'; 
+   apiUrl = 'http://localhost:3000/recipes/get-all-recipes'; 
 
-  constructor(private http: HttpClient) { }
+  constructor(private _http: HttpClient) { }
+
+getAllRecipes():Observable<Recipe[]> {
+  return this._http.get<Recipe[]>(this.apiUrl)
+}
 
   getRecipe(id: number): Observable<Recipe> {
-    return this.http.get<Recipe>(`${this.apiUrl}/${id}`);
+    return this._http.get<Recipe>(`${this.apiUrl}/${id}`);
   }
 }

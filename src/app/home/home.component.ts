@@ -1,24 +1,58 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { RecipeService } from '../allServices/recipe.service';
+import { Router } from '@angular/router';
+import { Recipe } from '../allInterfaces/recipe-interface';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+  constructor(
+    private _recipeService: RecipeService,
+    private router: Router
+  ) {}
+
+  recipes: Recipe[] = [];
+  filteredRecipes: Recipe[] = [];
+
   selectedDifficulty: string = 'None';
-  selectedMealType: string = 'Breakfast';
+  selectedMealType: string = '';
 
-  mealTypes: string[] = ['Breakfast', 'Lunch', 'Dinner'];
+  mealTypes: string[] = ['Breakfast', 'Lunch', 'Dinner']; 
 
-  filterByDifficulty() {
-    // Implement filter logic by difficulty
-    console.log('Filtered by difficulty:', this.selectedDifficulty);
+  ngOnInit(): void {
+    this.getAllRecipes();
   }
 
-  filterByMealType() {
-    // Implement filter logic by meal type
-    console.log('Filtered by meal type:', this.selectedMealType);
+  getAllRecipes(): void {
+    this._recipeService.getAllRecipes().subscribe({
+      next: (res) => {
+        this.recipes = res;
+      },
+    });
   }
+
+  onSelect(id: string): void {
+    // Navigate to recipe details page
+    this.router.navigate(['/recipe', id]);
+  }
+
+
+filterByMealType(mealType: string): Recipe[] {
+  const validMealTypes = ["Breakfast","Lunch","Dinner"];
+    
+  if (!validMealTypes.includes(mealType)){
+      console.error("Invalid meal type. Please provide 'Breakfast','Lunch' or 'Dinner'.");
+      return [];
+  }
+  const filtered =  this.recipes.filter(recipe => recipe.mealType.includes(mealType));
+
+  console.log(filtered) 
+  this.recipes = filtered
+  return filtered
+ 
+}
+
 }

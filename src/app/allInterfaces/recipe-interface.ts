@@ -1,16 +1,16 @@
 export interface Recipe {
-    name: string;
-    image: string;
-    difficulty: string;
-    rating: number;
-    voice: SpeechSynthesisVoice
-    youtubeLink: string;
-    mealType: string;
-    prepTimeMinutes: number;
-    cookTimeMinutes: number;
-    servings: number;
-    ingredients: string;
-    instructions: string;
-    caloriesPerServing: number;
+  _id: string;
+  name: string;
+  ingredients: [string];
+  instructions: string;
+  cuisine: string;
+  difficulty: string;
+  mealType: string;
+  calories: number;
+  cookTime: string;
+  prepTime: string;
+  servings: string;
+  image: string;
+  videoLink: string
   }
   

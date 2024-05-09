@@ -34,6 +34,7 @@ startTextToSpeech(): void {
   //   this.recipeService.getRecipe(id).subscribe(recipe => this.recipe = recipe);
   // }
 }
+let confirmationShown: boolean[] = [];
 
 function mRead(ingredients: string, instructions: string): void {
   let utterance = new SpeechSynthesisUtterance(`Before we get you started, let's make sure you have the following ingredients: ${ingredients}`);
@@ -51,41 +52,42 @@ function mRead(ingredients: string, instructions: string): void {
       utterance2.rate = 0.8;
       synth.speak(utterance2);
 
-      const user = confirm("Shall we begin?");
-      if (user) {
-        let utterance3 = new SpeechSynthesisUtterance(`Great! Let's begin. ${instructions}`);
-        utterance3.voice = voices[2];
-        utterance3.rate = 0.8;
-        synth.speak(utterance3);
+      if (!confirmationShown.includes(false)) {
+        const user = confirm("Shall we begin?");
+        if (user) {
+          confirmationShown = Array(instructions.split(".,").length).fill(false);
+          const utterance3 = new SpeechSynthesisUtterance(`Great! Let's begin. ${instructions}`);
+          utterance3.voice = voices[2];
+          utterance3.rate = 0.8;
+          synth.speak(utterance3);
 
-        const ins = instructions.split(".,");
-        let nextStep = true;
-        let counter = 0;
+          const ins = instructions.split(".,");
+          let counter = 0;
 
-        let inter = setInterval(() => {
-          if (nextStep) {
-            utterance3.text = `Step ${counter + 1}, ${ins[counter]}`;
-            synth.speak(utterance3);
-            nextStep = false;
+          const inter = setInterval(() => {
+            if (!confirmationShown[counter]) {
+              const utterance4 = new SpeechSynthesisUtterance(`Step ${counter + 1}, ${ins[counter]}`);
+              utterance4.voice = voices[2];
+              utterance4.rate = 0.8;
+              synth.speak(utterance4);
+              confirmationShown[counter] = true;
+              utterance4.addEventListener("end", function() {
+                confirm("Continue?");
+              });
+            }
             counter++;
-            utterance3.addEventListener("end", function() {
-              nextStep = true;
-            });
-          }
-          if (counter == ins.length) {
-            setTimeout(() => {
-              utterance3.text = `Cooking complete. Well done!`;
-              synth.speak(utterance3);
-            }, 3000);
-            clearInterval(inter);
-          }
-        }, 1500);
+            if (counter === ins.length) {
+              clearInterval(inter);
+              const utterance5 = new SpeechSynthesisUtterance(`Cooking complete. Well done!`);
+              utterance5.voice = voices[2];
+              utterance5.rate = 0.8;
+              synth.speak(utterance5);
+            }
+          }, 1500);
+        }
       }
     });
 
     synth.speak(utterance);
   };
 }
-
-
-
