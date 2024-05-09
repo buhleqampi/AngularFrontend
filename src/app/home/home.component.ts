@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   recipes: Recipe[] = [];
-  filteredRecipes: Recipe[] = [];
+  filteredRecipes?: Recipe[] = [];
 
   selectedDifficulty: string = 'None';
   selectedMealType: string = 'All';
