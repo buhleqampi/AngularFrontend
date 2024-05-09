@@ -7,7 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { RecipeDetailsComponent } from './recipe-details/recipe-details.component';
 import { HomeComponent } from './home/home.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+
 
 
 @NgModule({
@@ -15,7 +18,9 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     AppComponent,
     RecipeDetailsComponent,
     HomeComponent,
-    NavBarComponent
+    NavbarComponent,
+    FooterComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
