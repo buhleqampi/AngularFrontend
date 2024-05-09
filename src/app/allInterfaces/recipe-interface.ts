@@ -10,5 +10,6 @@ export interface Recipe {
   servings: String;
   image: String;
   videoLink: String
+  voice: string
   }
   

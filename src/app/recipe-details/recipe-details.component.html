@@ -10,9 +10,10 @@
     <p><strong><i class="fa-solid fa-people-group"></i> Servings:</strong>{{selectedRecipe.servings}}</p>
   <div class="modal-btns">
     
-    <!-- <a (click)="playVideo({{videoLink}})"><i class="far fa-circle-play fa-2x"></i></a>  -->
-    <!-- <a class="favoriteBtn"><i class="fas fa-heart fa-2x"></i></a> -->
-    <!-- <a (click)="startTextToSpeech({{recipe.voice}})"><i class="fas fa-volume-up fa-2x"></i></a> -->
+    <a href="{{selectedRecipe.videoLink}}" class="youtube-link" target="_blank"><i class="fa-regular fa-circle-play fa-2xl" id="modal-icon"></i></a>
+    <a href="#" class="favorite-btn"><i class="fas fa-heart fa-2xl" id="modal-icon"></i></a>
+    <a (click)="startTextToSpeech()"><i class="fas fa-volume-up fa-2x"></i></a>
+
   </div>
   
 </div>
