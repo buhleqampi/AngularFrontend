@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   recipes: Recipe[] = [];
-  filteredRecipes?: Recipe[] = [];
+  filteredRecipes: Recipe[] = [];
 
   selectedDifficulty: string = 'None';
   selectedMealType: string = 'All';
@@ -44,11 +44,13 @@ export class HomeComponent implements OnInit {
 
 
 filterByMealType(mealType: string): Recipe[] {
-  const validMealTypes = ["Breakfast","Lunch","Dinner"];
+  const validMealTypes = ["All","Breakfast","Lunch","Dinner"];
     
   if (!validMealTypes.includes(mealType)){
       console.error("Invalid meall type. Please provide 'Breakfast','Lunch' or 'Dinner'.");
       return [];
+  } else if (mealType === "All") {
+    this.getAllRecipes()
   }
   this.filteredRecipes =  this.recipes.filter(recipe => recipe.mealType.includes(mealType));
 
