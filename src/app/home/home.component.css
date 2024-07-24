@@ -84,7 +84,7 @@
     color: black;
   }
   
-  .recipe-card p {
+  .recipe-card p{
     margin-top: 5px;
     color: rgb(48, 45, 45);
   }
@@ -126,4 +126,8 @@
     padding: 15px;
     border-radius: 50%;
     box-shadow: 0px 5px 30px 1px heart;
+ }
+
+ .food{
+  padding-bottom: 50px;
  }

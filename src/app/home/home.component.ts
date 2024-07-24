@@ -18,18 +18,21 @@ export class HomeComponent implements OnInit {
   filteredRecipes: Recipe[] = [];
 
   selectedDifficulty: string = 'None';
-  selectedMealType: string = '';
+  selectedMealType: string = 'All';
 
-  mealTypes: string[] = ['Breakfast', 'Lunch', 'Dinner']; 
+  mealTypes: string[] = ['All','Breakfast', 'Lunch', 'Dinner']; 
 
   ngOnInit(): void {
     this.getAllRecipes();
+    this.filteredRecipes
+    console.log(this.recipes)
   }
 
   getAllRecipes(): void {
     this._recipeService.getAllRecipes().subscribe({
       next: (res) => {
         this.recipes = res;
+        this.filteredRecipes = res
       },
     });
   }
@@ -41,17 +44,19 @@ export class HomeComponent implements OnInit {
 
 
 filterByMealType(mealType: string): Recipe[] {
-  const validMealTypes = ["Breakfast","Lunch","Dinner"];
+  const validMealTypes = ["All","Breakfast","Lunch","Dinner"];
     
   if (!validMealTypes.includes(mealType)){
-      console.error("Invalid meal type. Please provide 'Breakfast','Lunch' or 'Dinner'.");
+      console.error("Invalid meall type. Please provide 'Breakfast','Lunch' or 'Dinner'.");
       return [];
+  } else if (mealType === "All") {
+    this.getAllRecipes()
   }
-  const filtered =  this.recipes.filter(recipe => recipe.mealType.includes(mealType));
+  this.filteredRecipes =  this.recipes.filter(recipe => recipe.mealType.includes(mealType));
 
-  console.log(mealType) 
-  this.recipes = filtered
-  return filtered
+  console.log(this.filteredRecipes) 
+  return this.filteredRecipes
+ 
 }
 
 }

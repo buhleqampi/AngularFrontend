@@ -1,51 +1,50 @@
 <div class="second">
-    <hr>
-    <form class="d-flex" role="search">
-      <input id="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-    </form>
-    <div class="row" style="justify-content: center;">
-      <div class="col-8">
-        <div class="filter-box">
-          <div class="btn-group" >
-            <label *ngFor="let meal of mealTypes">
-              <input class="radio" type="radio" name="mealType" [value]="meal" [(ngModel)]="selectedMealType" (change)="filterByMealType(meal)" >
-              {{ meal }}
-            </label>
-          
-          </div>
+  <hr>
+  <form class="d-flex" role="search">
+    <input id="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+  </form>
+  <div class="row" style="justify-content: center;">
+    <div class="col-8">
+      <div class="filter-box">
+        <div class="btn-group" >
+          <label *ngFor="let meal of mealTypes">
+            <input class="radio" type="radio" name="mealType" [value]="meal" [(ngModel)]="selectedMealType" (change)="filterByMealType(meal)" >
+            {{ meal }}
+          </label>
         </div>
       </div>
     </div>
   </div>
-  
-  
- <div class="row" >
-<div  class="recipe-card" *ngFor="let recipe of recipes" (click)="onSelect(recipe._id)">
-    <div class="header">
-      <img [src]="recipe.image" alt="">
-      <div class="icon">
-        <a type="button"><i class="fa fa-heart"></i></a>
-      </div>
+</div>
+
+
+<div class="row" >
+<div  class="recipe-card" *ngFor="let recipe of filteredRecipes" (click)="onSelect(recipe._id)">
+  <div class="header">
+    <img [src]="recipe.image" alt="">
+    <div class="icon">
+      <a type="button"><i class="fa fa-heart"></i></a>
     </div>
-    <div class="text">
-      <h2 class="food">{{ recipe.name | uppercase }}</h2>
-
-      <div class="highlights">
-        <i class="fa fa-clock-o">{{ recipe.prepTime }}</i>
-      <i class="fa fa-clock">{{ recipe.cookTime }}</i>
-      <i class="fa fa-users"> {{ recipe.servings }}</i>
-      </div>
-
-      <p class="tags">{{ recipe.cuisine}}</p>
-      <!-- <p class="info">{{ recipe.difficulty }}</p> -->
-
-    </div>
-
-    <div class="icons-group">
-      <a class="read-more-btn" (click)="onSelect(recipe._id)"><i class="fas fa-arrow-right-to-bracket fa-2xl" id="modal-icon"></i></a>
-      <a href="#" class="favorite-btn"><i class="fas fa-heart fa-2xl" id="modal-icon"></i></a>
-      <!-- <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can"></i></a> -->
-      <a href="{{recipe.videoLink}}" class="youtube-link" target="_blank"><i class="fa-regular fa-circle-play fa-2xl" id="modal-icon"></i></a>
-    </div>
-
   </div>
+  <div class="text">
+    <h2 class="food">{{ recipe.name | uppercase }}</h2>
+
+    <div class="highlights">
+      <i class="fa fa-clock-o"> {{ recipe.prepTime }}</i>
+    <i class="fa fa-clock"> {{ recipe.cookTime }}</i>
+    <i class="fa fa-users"> {{ recipe.servings }}</i>
+    </div>
+
+    <!-- <p class="tags">{{ recipe.cuisine}}</p> -->
+    <!-- <p class="info">{{ recipe.difficulty }}</p> -->
+
+  <!-- </div>
+
+  <div class="icons-group">
+    <a class="read-more-btn" (click)="onSelect(recipe._id)"><i class="fas fa-arrow-right-to-bracket fa-2xl" id="modal-icon"></i></a>
+    <a href="#" class="favorite-btn"><i class="fas fa-heart fa-2xl" id="modal-icon"></i></a> 
+    <a href="#" class="delete-btn"><i class="fa-solid fa-trash-can"></i></a>  
+    <a href="{{recipe.videoLink}}" class="youtube-link" target="_blank"><i class="fa-regular fa-circle-play fa-2xl" id="modal-icon"></i></a>
+  </div>   -->
+
+</div>
