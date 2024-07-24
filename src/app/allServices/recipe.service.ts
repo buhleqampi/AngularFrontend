@@ -7,7 +7,7 @@ import { Recipe } from '../allInterfaces/recipe-interface';
   providedIn: 'root'
 })
 export class RecipeService {
-   apiUrl = 'http://localhost:3000/recipes/get-all-recipes'; 
+   apiUrl = 'http://localhost:4000/recipes/get-all-recipes'; 
 
   constructor(private _http: HttpClient) { }
 

@@ -49,10 +49,9 @@ filterByMealType(mealType: string): Recipe[] {
   }
   const filtered =  this.recipes.filter(recipe => recipe.mealType.includes(mealType));
 
-  console.log(filtered) 
+  console.log(mealType) 
   this.recipes = filtered
   return filtered
- 
 }
 
 }
